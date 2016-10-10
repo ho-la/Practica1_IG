@@ -104,18 +104,17 @@ void funDisplay() {
     
  // Para configurar la matriz matriz P
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    
-    // Proyeccion Ortogonal
+    glLoadIdentity();  
+    // Proyeccion Ortogonal: 
     //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
     //glOrtho(left, right, bottom, top, nplane, fplane);
-    
-    // Proyeccion en Perspectiva 1: Frustum
+  
+    //Proyeccion en Frustum
     //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
     //glFrustum(left, right, bottom, top, nplane, fplane);
   
 
-    // Matriz de Proyección P (Cámara)
+    //En perspectiva
     GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
     GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
     gluPerspective(fovy,aspectRatio,nplane,fplane);
@@ -129,6 +128,7 @@ void funDisplay() {
     
  // Dibujamos los objetos (M)
     glTranslatef(0.0f, 0.0f, desZ);
+    
     tarea1();
  // Intercambiamos los buffers
     glutSwapBuffers();
