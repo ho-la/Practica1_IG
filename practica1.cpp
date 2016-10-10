@@ -94,14 +94,6 @@ void funReshape(int wnew, int hnew) {
     
     w = wnew;
     h = hnew;
- // Proyeccion Ortogonal
-    //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
-    //glOrtho(left, right, bottom, top, nplane, fplane);
-    
- // Proyeccion en Perspectiva 1: Frustum
-    //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
-    //glFrustum(left, right, bottom, top, nplane, fplane);
-  
 }
 
 void funDisplay() {
@@ -114,7 +106,16 @@ void funDisplay() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
- // Matriz de Proyección P (Cámara)
+    // Proyeccion Ortogonal
+    //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
+    //glOrtho(left, right, bottom, top, nplane, fplane);
+    
+    // Proyeccion en Perspectiva 1: Frustum
+    //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
+    //glFrustum(left, right, bottom, top, nplane, fplane);
+  
+
+    // Matriz de Proyección P (Cámara)
     GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
     GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
     gluPerspective(fovy,aspectRatio,nplane,fplane);
@@ -131,7 +132,6 @@ void funDisplay() {
     tarea1();
  // Intercambiamos los buffers
     glutSwapBuffers();
-    
 }
 
 void drawTriangulo(char color) {  
@@ -236,20 +236,23 @@ void tarea1(){
     //Dibuja esfera amarilla
     glPushMatrix();
         glLineWidth(1.0);
+        glRotatef(rotY,0.0f,1.0f,0.0f);
         glDrawSphere('y',2.0f);
     glPopMatrix();    
-
 }
-void tarea2(){ 
+void tarea2(){
+    //Dbujamos el sol y el número
     tarea1();
+    //Dibujamos la Tierra
     glPushMatrix(); 
         glLineWidth(1.0);
         glTranslatef( 5.0f, 0.0f, 0.0f);
         glDrawSphere('b',0.5f);
     glPopMatrix();
+    //Dibujamos la luna
     glPushMatrix(); 
         glLineWidth(1.0);
-        glTranslatef( 6.5f, 0.0f, 0.0f);
+        glTranslatef(6.5f, 0.0f, 0.0f);
         glDrawSphere('w',0.1f);
     glPopMatrix();
 
