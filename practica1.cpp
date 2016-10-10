@@ -115,10 +115,11 @@ void funDisplay() {
   
 
     //En perspectiva
+    /**/
     GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
     GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
     gluPerspective(fovy,aspectRatio,nplane,fplane);
-      
+    /**/ 
  // Para configurar las matrices M y V
     glMatrixMode(GL_MODELVIEW);  
     glLoadIdentity();
