@@ -130,7 +130,8 @@ void funDisplay() {
  // Dibujamos los objetos (M)
     glTranslatef(0.0f, 0.0f, desZ);
     
-    tarea1();
+    //tarea1();
+    tarea2();
  // Intercambiamos los buffers
     glutSwapBuffers();
 }
@@ -204,42 +205,50 @@ void drawOurNumber() {
 }
 void glDrawSphere(char color,float radio){
     switch(color) {
+        //White
         case 'w':
             glColor3f(1.0f, 1.0f, 1.0f);
             break;
+        //Yellow    
         case 'y':
             glColor3f(1.0f, 1.0f, 0.0f);
             break;
+        //Red
         case 'r':
             glColor3f(1.0f, 0.0f, 0.0f);
             break;
+        //Green
         case 'g':
             glColor3f(0.0f, 1.0f, 0.0f);
             break;
+        //Blue
         case 'b':
             glColor3f(0.0f, 0.0f, 1.0f);
             break;
+        //White
         default:
             glColor3f(1.0f, 1.0f, 1.0f);            
     }
     glutWireSphere(radio,20,20); 
-    //(GLdouble radius,GLint slices, GLint stacks);
-  
+    //(GLdouble radius,GLint slices, GLint stacks); (number of lines)
 }
 void tarea1(){
     //Dibuja nuestro número
     glPushMatrix(); 
+        //Grosor de las rayas
         glLineWidth(5.0);
+        //Ajuste
         glScalef(0.3f, 0.3f, 0.3f);
         glTranslatef( -1.5f, -0.5f, 0.0f);
         drawOurNumber();
     glPopMatrix();
     //Dibuja esfera amarilla
-    glPushMatrix();
+    //glPushMatrix();
         glLineWidth(1.0);
         glRotatef(rotY,0.0f,1.0f,0.0f);
         glDrawSphere('y',2.0f);
-    glPopMatrix();    
+    //glPopMatrix();
+    
 }
 void tarea2(){
     //Dbujamos el sol y el número
@@ -248,6 +257,7 @@ void tarea2(){
     glPushMatrix(); 
         glLineWidth(1.0);
         glTranslatef( 5.0f, 0.0f, 0.0f);
+        glRotatef(rotY,0.0f,1.0f,0.0f);
         glDrawSphere('b',0.5f);
     glPopMatrix();
     //Dibujamos la luna
