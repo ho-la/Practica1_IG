@@ -259,13 +259,14 @@ void tarea2(){
         glTranslatef( 5.0f, 0.0f, 0.0f);
         glRotatef(rotY,0.0f,1.0f,0.0f);
         glDrawSphere('b',0.5f);
+        glPushMatrix(); 
+            glLineWidth(1.0);
+            glTranslatef(1.5f, 0.0f, 0.0f);
+            glDrawSphere('w',0.1f);
+        glPopMatrix();
     glPopMatrix();
     //Dibujamos la luna
-    glPushMatrix(); 
-        glLineWidth(1.0);
-        glTranslatef(6.5f, 0.0f, 0.0f);
-        glDrawSphere('w',0.1f);
-    glPopMatrix();
+
 
 }
 void tarea3(){
