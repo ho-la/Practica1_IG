@@ -36,7 +36,12 @@ int h = 500;
 GLfloat desZ = -5.0f;
 GLfloat rotY =  0.0f;
 
-GLfloat radioT = 0.5f;
+GLfloat anio = (360.0/360.0);
+GLfloat dia = (360.0/24.0);
+GLfloat cicloLuna=(dia/27.0);
+GLfloat RAnio = 0.0f;
+GLfloat RDia = 0.0f;
+GLfloat RCicloLuna=0.0f;
 
 int main(int argc, char** argv) {
     
@@ -106,8 +111,8 @@ void funDisplay() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();  
     // Proyeccion Ortogonal: 
-    //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
-    //glOrtho(left, right, bottom, top, nplane, fplane);
+    GLfloat left=-4.0, right=4.0, bottom=-4.0, top=4.0, nplane=1.0, fplane=10.0;
+    glOrtho(left, right, bottom, top, nplane, fplane);
   
     //Proyeccion en Frustum
     //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
@@ -116,9 +121,9 @@ void funDisplay() {
 
     //En perspectiva
     /**/
-    GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
-    GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
-    gluPerspective(fovy,aspectRatio,nplane,fplane);
+    //GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
+    //GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
+    //gluPerspective(fovy,aspectRatio,nplane,fplane);
     /**/ 
  // Para configurar las matrices M y V
     glMatrixMode(GL_MODELVIEW);  
@@ -168,10 +173,16 @@ void funKeyboard(int key, int x, int y) {
             desZ += 0.1f;
             break;
         case GLUT_KEY_RIGHT:
-            rotY -= 5.0f;
+            //rotY -= 5.0f;
+            RAnio -= anio;
+            RDia -= dia;
+            RCicloLuna-=cicloLuna;
             break;
         case GLUT_KEY_LEFT:
-            rotY += 5.0f;
+            //rotY += 5.0f;
+            RAnio += anio ;
+            RDia += dia;
+            RCicloLuna+=cicloLuna;
             break;
         default:
             desZ = -5.0f;  
@@ -243,12 +254,13 @@ void tarea1(){
         drawOurNumber();
     glPopMatrix();
     //Dibuja esfera amarilla
-    //glPushMatrix();
+    glPushMatrix();
         glLineWidth(1.0);
-        glRotatef(rotY,0.0f,1.0f,0.0f);
+        glRotatef(50,0.0f,1.0f,0.0f);
         glDrawSphere('y',2.0f);
-    //glPopMatrix();
+    glPopMatrix();
     
+    glRotatef(RAnio,0.0f,1.0f,0.0f);
 }
 void tarea2(){
     //Dbujamos el sol y el número
@@ -256,18 +268,19 @@ void tarea2(){
     //Dibujamos la Tierra
     glPushMatrix(); 
         glLineWidth(1.0);
-        glTranslatef( 5.0f, 0.0f, 0.0f);
-        glRotatef(rotY,0.0f,1.0f,0.0f);
+        glTranslatef(4.0f, 0.0f, 0.0f);
+        //glRotatef(rotY,0.0f,1.0f,0.0f);
+        glRotatef(RDia,0.0f,1.0f,0.0f);
+        //¿Como hacer que el angulo de giro de la Luna sea distinta a la de la Tierra?       
         glDrawSphere('b',0.5f);
+        //Dibujamos la luna
         glPushMatrix(); 
             glLineWidth(1.0);
             glTranslatef(1.5f, 0.0f, 0.0f);
+            //La luna no gira sobre si mismo
             glDrawSphere('w',0.1f);
         glPopMatrix();
     glPopMatrix();
-    //Dibujamos la luna
-
-
 }
 void tarea3(){
     
