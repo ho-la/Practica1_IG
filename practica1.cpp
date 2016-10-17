@@ -136,8 +136,8 @@ void funDisplay() {
     glTranslatef(0.0f, 0.0f, desZ);
     glTranslatef(0.0f, 0.0f, -5.0f);
     //tarea1();
-    //tarea2();
-    tarea3();
+    tarea2();
+    //tarea3();
     //drawPieza();
  // Intercambiamos los buffers
     glutSwapBuffers();
