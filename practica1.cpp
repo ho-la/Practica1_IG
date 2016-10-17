@@ -35,10 +35,12 @@ int w = 800;
 int h = 500;
 GLfloat desZ = -5.0f;
 GLfloat rotY =  0.0f;
-
-GLfloat anio = (360.0/360.0);
+//Si gira de 1h en 1h
+GLfloat anio = (360.0/365.0)/24;
 GLfloat dia = (360.0/24.0);
-GLfloat cicloLuna=(dia/27.0);
+GLfloat cicloLuna=(360.0/27.0)/24;
+
+
 GLfloat RAnio = 0.0f;
 GLfloat RDia = 0.0f;
 GLfloat RCicloLuna=0.0f;
@@ -138,7 +140,6 @@ void funDisplay() {
     //tarea1();
     tarea2();
     //tarea3();
-    //drawPieza();
  // Intercambiamos los buffers
     glutSwapBuffers();
 }
@@ -267,19 +268,20 @@ void tarea1(){
 void tarea2(){
     //Dbujamos el sol y el número
     tarea1();
-    //Dibujamos la Tierra
     glPushMatrix(); 
         glLineWidth(1.0);
         glTranslatef(4.0f, 0.0f, 0.0f);
         //glRotatef(rotY,0.0f,1.0f,0.0f);
-        glRotatef(RDia,0.0f,1.0f,0.0f);
-        //¿Como hacer que el angulo de giro de la Luna sea distinta a la de la Tierra?       
-        glDrawSphere('b',0.5f);
-        //Dibujamos la luna
-        glPushMatrix(); 
+        glRotatef(RCicloLuna,0.0f,1.0f,0.0f);
+        //Dibujamos la Tierra
+        glPushMatrix();    
+            glRotatef(RDia,0.0f,1.0f,0.0f);
+            glDrawSphere('b',0.5f);
+        glPopMatrix(); 
             glLineWidth(1.0);
             glTranslatef(1.5f, 0.0f, 0.0f);
-            //La luna no gira sobre si mismo
+        glPushMatrix();    
+            //Dibujamos la luna
             glDrawSphere('w',0.1f);
         glPopMatrix();
     glPopMatrix();
