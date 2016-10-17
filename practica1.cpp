@@ -42,7 +42,7 @@ GLfloat cicloLuna=(dia/27.0);
 GLfloat RAnio = 0.0f;
 GLfloat RDia = 0.0f;
 GLfloat RCicloLuna=0.0f;
-
+GLfloat angulo=90.0f;
 int main(int argc, char** argv) {
     
  // Inicializamos GLUT
@@ -136,8 +136,9 @@ void funDisplay() {
     glTranslatef(0.0f, 0.0f, desZ);
     glTranslatef(0.0f, 0.0f, -5.0f);
     //tarea1();
-    tarea2();
-    //tarea3();
+    //tarea2();
+    tarea3();
+    //drawPieza();
  // Intercambiamos los buffers
     glutSwapBuffers();
 }
@@ -284,14 +285,30 @@ void tarea2(){
     glPopMatrix();
 }
 void tarea3(){
-    
+    glPushMatrix();
+        drawPieza();
+    glPopMatrix();
+    glPushMatrix();
+        glTranslatef(0.5f, 3.5f, 0.0f);
+        glRotatef(-90,0.0f,0.0f,1.0f);
+        drawPieza();
+    glPopMatrix();
+    glPushMatrix();
+        glTranslatef(1.0f, 1.5f, 0.0f);
+        glRotatef(-90,0.0f,0.0f,1.0f);
+        drawPieza();
+    glPopMatrix();
+    glPushMatrix();
+        glTranslatef(3.0f, 0.0f, 0.0f);
+        drawPieza();
+    glPopMatrix();
 }
 void drawPieza(){
-    glColor3f(1.0f,1.0f,1.0f);
+    glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_QUADS);
-        glVertex3f( 0.0f,  3.0f, 0.0f);
-        glVertex3f( 1.0f,  3.0f, 0.0f);
-        glVertex3f( 0.0f,  0.0f, 0.0f);
-        glVertex3f( 1.0f,  0.0f, 0.0f);
+        glVertex3f( 0.0, 0.0, 0.0);
+        glVertex3f( 1.0, 0.0, 0.0);        
+        glVertex3f( 1.0, 3.0, 0.0);
+        glVertex3f( 0.0, 3.0, 0.0);
     glEnd();
 }
