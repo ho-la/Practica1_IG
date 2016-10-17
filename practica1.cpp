@@ -31,7 +31,7 @@ void tarea2();
 void tarea3();
 void drawPieza();
 // Variables globales
-int w = 500;
+int w = 800;
 int h = 500;
 GLfloat desZ = -5.0f;
 GLfloat rotY =  0.0f;
@@ -111,8 +111,8 @@ void funDisplay() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();  
     // Proyeccion Ortogonal: 
-    GLfloat left=-4.0, right=4.0, bottom=-4.0, top=4.0, nplane=1.0, fplane=10.0;
-    glOrtho(left, right, bottom, top, nplane, fplane);
+    //GLfloat left=-4.0, right=4.0, bottom=-4.0, top=4.0, nplane=1.0, fplane=10.0;
+    //glOrtho(left, right, bottom, top, nplane, fplane);
   
     //Proyeccion en Frustum
     //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
@@ -121,9 +121,9 @@ void funDisplay() {
 
     //En perspectiva
     /**/
-    //GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
-    //GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
-    //gluPerspective(fovy,aspectRatio,nplane,fplane);
+    GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
+    GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
+    gluPerspective(fovy,aspectRatio,nplane,fplane);
     /**/ 
  // Para configurar las matrices M y V
     glMatrixMode(GL_MODELVIEW);  
@@ -134,9 +134,10 @@ void funDisplay() {
     
  // Dibujamos los objetos (M)
     glTranslatef(0.0f, 0.0f, desZ);
-    
+    glTranslatef(0.0f, 0.0f, -5.0f);
     //tarea1();
     tarea2();
+    //tarea3();
  // Intercambiamos los buffers
     glutSwapBuffers();
 }
