@@ -35,8 +35,8 @@ GLfloat desZ = -5.0f;
 GLfloat rotY =  0.0f;
 //Si gira de 1h en 1h
 GLfloat anio = (360.0/365.0)/24;
-GLfloat dia = (360.0/24.0);
-GLfloat cicloLuna=(360.0/27.0)/24;
+GLfloat dia = (360.0/24.0)/anio;
+GLfloat mes=anio/12;
 
 
 GLfloat RAnio = 0.0f;
@@ -117,7 +117,6 @@ void funDisplay() {
     //Proyeccion en Frustum
     //GLfloat left=-2.0, right=2.0, bottom=-2.0, top=2.0, nplane=3.0, fplane=10.0;
     //glFrustum(left, right, bottom, top, nplane, fplane);
-  
 
     //En perspectiva
     /**/
@@ -142,28 +141,6 @@ void funDisplay() {
     glutSwapBuffers();
 }
 
-void drawTriangulo(char color) {  
-    switch(color) {
-        case 'r':
-            glColor3f(1.0f, 0.0f, 0.0f);
-            break;
-        case 'g':
-            glColor3f(0.0f, 1.0f, 0.0f);
-            break;
-        case 'b':
-            glColor3f(0.0f, 0.0f, 1.0f);
-            break;
-        default:
-            glColor3f(1.0f, 1.0f, 1.0f);            
-    }
-    glBegin(GL_TRIANGLES);
-        glVertex3f(-0.5f, -0.5f, 0.0f); // v1
-        glVertex3f( 0.5f, -0.5f, 0.0f); // v2
-        glVertex3f( 0.0f,  0.5f, 0.0f); // v3
-    glEnd();
-    
-}
-
 void funKeyboard(int key, int x, int y) {
 
     switch(key) {
@@ -177,13 +154,13 @@ void funKeyboard(int key, int x, int y) {
             //rotY -= 5.0f;
             RAnio -= anio;
             RDia -= dia;
-            RCicloLuna-=cicloLuna;
+            RCicloLuna-=mes;
             break;
         case GLUT_KEY_LEFT:
             //rotY += 5.0f;
             RAnio += anio ;
             RDia += dia;
-            RCicloLuna+=cicloLuna;
+            RCicloLuna+=mes;
             break;
         default:
             desZ = -5.0f;  
@@ -283,32 +260,4 @@ void tarea2(){
             glDrawSphere('w',0.1f);
         glPopMatrix();
     glPopMatrix();
-}
-void tarea3(){
-    glPushMatrix();
-        drawPieza();
-    glPopMatrix();
-    glPushMatrix();
-        glTranslatef(0.5f, 3.5f, 0.0f);
-        glRotatef(-90,0.0f,0.0f,1.0f);
-        drawPieza();
-    glPopMatrix();
-    glPushMatrix();
-        glTranslatef(1.0f, 1.5f, 0.0f);
-        glRotatef(-90,0.0f,0.0f,1.0f);
-        drawPieza();
-    glPopMatrix();
-    glPushMatrix();
-        glTranslatef(3.0f, 0.0f, 0.0f);
-        drawPieza();
-    glPopMatrix();
-}
-void drawPieza(){
-    glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_QUADS);
-        glVertex3f( 0.0, 0.0, 0.0);
-        glVertex3f( 1.0, 0.0, 0.0);        
-        glVertex3f( 1.0, 3.0, 0.0);
-        glVertex3f( 0.0, 3.0, 0.0);
-    glEnd();
 }
