@@ -32,8 +32,8 @@ void P1tarea2();
 void P1tarea3();
 void P1drawPieza();
 //Práctica2
-void P2tarea1();
-
+void P2Tarea1();
+void P2Tarea2();
 // Variables globales
 int w = 800;
 int h = 500;
@@ -44,7 +44,6 @@ GLfloat rotY =  0.0f;
 GLfloat anio = (360.0/365.0)/24; //365*24 horas
 GLfloat dia = (360.0/24.0); //24 horas
 GLfloat mes= anio*12;  // Luna gira 12 veces sobre a Tierra en un año
-
 
 GLfloat RAnio = 0.0f;
 GLfloat RDia = 0.0f;
@@ -345,5 +344,32 @@ void P2Tarea1(){
             glDrawSphere('w',0.1f);
         glPopMatrix();
         //incrementar variables
+    glPopMatrix();
+}
+void P2Tarea2(){
+    glPushMatrix();
+        //Dibujar sol
+        glPushMatrix();
+            glRotatef(90,1.0f,0.0f,0.0f);
+            glDrawSphere('y',2.0f);
+        glPopMatrix();
+        //Dibujar tierra
+        glRotatef(-30,0.0f,0.0f,1.0f);
+        glRotatef(RAnio,0.0f,1.0f,0.0f);
+        glTranslatef(4.0f,0.0f,0.0f);
+        glRotatef(RDia,0.0f,1.0f,0.0f);
+        glPushMatrix();
+            glRotatef(90,1.0f,0.0f,0.0f);
+            glDrawSphere('b',0.5f);
+        glPopMatrix();
+        glRotatef(-RDia,0.0f,1.0f,0.0f);
+        //Dibujar luna
+        glRotatef(45,0.0f,0.0f,1.0f);
+        glRotatef(RMes,0.0f,1.0f,0.0f);
+        glTranslatef(1.5,0.0,0.0);
+        glPushMatrix();
+            glRotatef(90,1.0f,0.0f,0.0f);
+            glDrawSphere('w',0.1f);
+        glPopMatrix();
     glPopMatrix();
 }
