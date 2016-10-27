@@ -26,25 +26,30 @@ void destroyFunc();
 
 void drawOurNumber();
 void glDrawSphere(char color,float radio);
-void tarea1();
-void tarea2();
-void tarea3();
-void drawPieza();
+//Práctica1
+void P1tarea1();
+void P1tarea2();
+void P1tarea3();
+void P1drawPieza();
+//Práctica2
+void P2tarea1();
+
 // Variables globales
 int w = 800;
 int h = 500;
 GLfloat desZ = -5.0f;
 GLfloat rotY =  0.0f;
+
 //Si gira de 1h en 1h
-GLfloat anio = (360.0/365.0)/24;
-GLfloat dia = (360.0/24.0);
-GLfloat cicloLuna=(360.0/27.0)/24;
+GLfloat anio = (360.0/365.0)/24; //365*24 horas
+GLfloat dia = (360.0/24.0); //24 horas
+GLfloat mes= anio*12;  // Luna gira 12 veces sobre a Tierra en un año
 
 
 GLfloat RAnio = 0.0f;
 GLfloat RDia = 0.0f;
-GLfloat RCicloLuna=0.0f;
-GLfloat angulo=90.0f;
+GLfloat RMes=0.0f;
+
 int main(int argc, char** argv) {
     
  // Inicializamos GLUT
@@ -137,9 +142,10 @@ void funDisplay() {
  // Dibujamos los objetos (M)
     glTranslatef(0.0f, 0.0f, desZ);
     glTranslatef(0.0f, 0.0f, -5.0f);
-    //tarea1();
-    tarea2();
-    //tarea3();
+    //P1tarea1();
+    //P1tarea2();
+    //P1tarea3();
+    P2Tarea1();
  // Intercambiamos los buffers
     glutSwapBuffers();
 }
@@ -179,13 +185,13 @@ void funKeyboard(int key, int x, int y) {
             //rotY -= 5.0f;
             RAnio -= anio;
             RDia -= dia;
-            RCicloLuna-=cicloLuna;
+            RMes-=mes;
             break;
         case GLUT_KEY_LEFT:
             //rotY += 5.0f;
             RAnio += anio ;
             RDia += dia;
-            RCicloLuna+=cicloLuna;
+            RMes+=mes;
             break;
         default:
             desZ = -5.0f;  
@@ -246,7 +252,7 @@ void glDrawSphere(char color,float radio){
     glutWireSphere(radio,20,20); 
     //(GLdouble radius,GLint slices, GLint stacks); (number of lines)
 }
-void tarea1(){
+void P1tarea1(){
     //Dibuja nuestro número
     glPushMatrix(); 
         //Grosor de las rayas
@@ -265,14 +271,14 @@ void tarea1(){
     
     glRotatef(RAnio,0.0f,1.0f,0.0f);
 }
-void tarea2(){
+void P1tarea2(){
     //Dbujamos el sol y el número
-    tarea1();
+    P1tarea1();
     glPushMatrix(); 
         glLineWidth(1.0);
         glTranslatef(4.0f, 0.0f, 0.0f);
         //glRotatef(rotY,0.0f,1.0f,0.0f);
-        glRotatef(RCicloLuna,0.0f,1.0f,0.0f);
+        glRotatef(RMes,0.0f,1.0f,0.0f);
         //Dibujamos la Tierra
         glPushMatrix();    
             glRotatef(RDia,0.0f,1.0f,0.0f);
@@ -286,26 +292,26 @@ void tarea2(){
         glPopMatrix();
     glPopMatrix();
 }
-void tarea3(){
+void P1tarea3(){
     glPushMatrix();
-        drawPieza();
+        P1drawPieza();
     glPopMatrix();
     glPushMatrix();
         glTranslatef(0.5f, 3.5f, 0.0f);
         glRotatef(-90,0.0f,0.0f,1.0f);
-        drawPieza();
+        P1drawPieza();
     glPopMatrix();
     glPushMatrix();
         glTranslatef(1.0f, 1.5f, 0.0f);
         glRotatef(-90,0.0f,0.0f,1.0f);
-        drawPieza();
+        P1drawPieza();
     glPopMatrix();
     glPushMatrix();
         glTranslatef(3.0f, 0.0f, 0.0f);
-        drawPieza();
+        P1drawPieza();
     glPopMatrix();
 }
-void drawPieza(){
+void P1drawPieza(){
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_QUADS);
         glVertex3f( 0.0, 0.0, 0.0);
@@ -313,4 +319,31 @@ void drawPieza(){
         glVertex3f( 1.0, 3.0, 0.0);
         glVertex3f( 0.0, 3.0, 0.0);
     glEnd();
+}
+void P2Tarea1(){
+    glPushMatrix();
+        //Dibujar sol
+        glPushMatrix();
+            glRotatef(90,1.0f,0.0f,0.0f);
+            glDrawSphere('y',2.0f);
+        glPopMatrix();
+        //Dibujar tierra
+        glRotatef(RAnio,0.0f,1.0f,0.0f);
+        
+        glTranslatef(4.0f,0.0f,0.0f);
+        glRotatef(RDia,0.0f,1.0f,0.0f);
+        glPushMatrix();
+            glRotatef(90,1.0f,0.0f,0.0f);
+            glDrawSphere('b',0.5f);
+        glPopMatrix();
+        glRotatef(-RDia,0.0f,1.0f,0.0f);
+        //Dibujar luna
+        glRotatef(RMes,0.0f,1.0f,0.0f);
+        glTranslatef(1.5,0.0,0.0);
+        glPushMatrix();
+            glRotatef(90,1.0f,0.0f,0.0f);
+            glDrawSphere('w',0.1f);
+        glPopMatrix();
+        //incrementar variables
+    glPopMatrix();
 }
