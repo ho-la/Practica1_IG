@@ -34,6 +34,8 @@ void P1drawPieza();
 //Práctica2
 void P2Tarea1();
 void P2Tarea2();
+void P2Tarea3();
+void P2Tarea4();
 // Variables globales
 int w = 800;
 int h = 500;
@@ -48,6 +50,10 @@ GLfloat mes= anio*12;  // Luna gira 12 veces sobre a Tierra en un año
 GLfloat RAnio = 0.0f;
 GLfloat RDia = 0.0f;
 GLfloat RMes=0.0f;
+
+GLfloat T4Girar=0.0f;
+GLfloat T4Dezplazar=0.0f;
+GLboolean esTarea4=true;
 
 int main(int argc, char** argv) {
     
@@ -172,7 +178,26 @@ void drawTriangulo(char color) {
 }
 
 void funKeyboard(int key, int x, int y) {
-
+    if(esTarea4){
+        switch(key){
+        case GLUT_KEY_UP:
+            T4Girar += 0.1f;
+            break;
+        case GLUT_KEY_DOWN:
+            T4Girar  -= 0.1f;
+            break;
+        case GLUT_KEY_RIGHT:
+            T4Dezplazar += 0.1f;
+            break;
+        case GLUT_KEY_LEFT:
+            T4Dezplazar -= 0.1f;
+            break;
+        default:
+            T4Girar = 0.0f;
+            T4Dezplazar = 0.0f;
+        }
+    }
+    else{
     switch(key) {
         case GLUT_KEY_UP:
             desZ -= 0.1f;
@@ -184,19 +209,19 @@ void funKeyboard(int key, int x, int y) {
             //rotY -= 5.0f;
             RAnio -= anio;
             RDia -= dia;
-            RMes-=mes;
+            RMes -=mes;
             break;
         case GLUT_KEY_LEFT:
             //rotY += 5.0f;
-            RAnio += anio ;
+            RAnio += anio;
             RDia += dia;
-            RMes+=mes;
+            RMes +=mes;
             break;
         default:
             desZ = -5.0f;  
             rotY =  0.0f;
     }
-    
+    }
     glutPostRedisplay();
     
 }
@@ -372,4 +397,35 @@ void P2Tarea2(){
             glDrawSphere('w',0.1f);
         glPopMatrix();
     glPopMatrix();
+}
+void P2Tarea3(){
+    
+}
+void P2Tarea4(){
+    glPushMatrix();
+        glTranslatef(2.5f,0.0f,0.0f);
+        glRotatef(T4Girar,0.0f,0.0f,1.0f);
+        glRotatef(-90,0.0f,0.0f,1.0f);
+        glPushMatrix();
+            glTranslatef(-0.5f,-0.5f,0.0f);
+            glColor3f(1.0f, 0.0f, 1.0f);
+            P1drawPieza();
+        glPopMatrix();
+        glPushMatrix();
+            glRotatef(90,0.0f,0.0f,1.0f);
+            glTranslatef(T4Dezplazar,0.0f,0.0f);
+            glTranslatef(2.5f,0.25f,0.0f);
+            glScalef(0.5f,0.5f,1.0f);
+            glRotatef(-90,0.0f,0.0f,1.0f);
+            glColor3f(0.0f, 1.0f, 0.0f);
+            P1drawPieza();
+        glPopMatrix();
+    glPopMatrix();
+    glPushMatrix();
+        glTranslatef(-0.5f,0.5f,0.0f);
+        glRotatef(-90,0.0f,0.0f,1.0f);
+        glColor3f(0.0f, 0.0f, 1.0f);
+        P1drawPieza();
+    glPopMatrix();
+    esTarea4=true;
 }
